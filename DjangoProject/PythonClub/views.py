@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Product, PythonClubType, Review
 
 # Create your views here.
@@ -10,4 +10,7 @@ def products(request):
     return render (request, 'PythonClub/products.html', 
     {'product_list': product_list})
 
-
+def productdetail (request,id):
+    product = get_object_or_404(Product, pk = id)
+    return render(request,'PythonClub/productdetail.html',
+    {'product': product})
