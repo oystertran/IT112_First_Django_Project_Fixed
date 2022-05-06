@@ -21,6 +21,15 @@ class Product(models.Model):
     producturl = models.URLField()
     description = models.TextField()
 
+    def discountAmount(self):
+        self.discount = self.price * .05
+        return self.discount
+#need to figure ot why not working
+#something to do with the function itself
+    def discountPrice(self):
+        disc = self.discountAmount()
+        self.discountedPrice = self.price - disc
+
     def __str__(self):
         return self.productname
     
@@ -33,6 +42,14 @@ class Review(models.Model):
     product = models.ForeignKey(Product, on_delete = models.CASCADE)
     reviewdate = models.DateField()
     reviewtext = models.TextField()
+
+    def discountAmount(self):
+        self.discount = self.price * .05
+        return self.discount
+
+    def discountPrice(self):
+        disc = discountAmount()
+        self.discountedPrice = self.price - self.disc
 
     def __str__(self):
         return self.title
