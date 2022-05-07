@@ -28,7 +28,8 @@ class Product(models.Model):
 #something to do with the function itself
     def discountPrice(self):
         disc = self.discountAmount()
-        self.discountedPrice = self.price - disc
+        self.discountPrice = self.price - disc
+        return self.discountPrice
 
     def __str__(self):
         return self.productname
@@ -49,7 +50,8 @@ class Review(models.Model):
 
     def discountPrice(self):
         disc = discountAmount()
-        self.discountedPrice = self.price - self.disc
+        self.discountPrice = self.price - self.disc
+        return self.discountPrice
 
     def __str__(self):
         return self.title

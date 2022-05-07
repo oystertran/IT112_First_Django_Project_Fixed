@@ -2,6 +2,7 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 from .models import PythonClubType, Product, Review
 import datetime
+from .forms import ProductForm
 
 # Create your tests here.
 
@@ -35,4 +36,31 @@ class ProductTest(TestCase):
 
     def test_discountedAmount(self):
         disc = self.product.price*(1- .05)
-        self.assertEqual(self.product.discountPrice(),1,140.94)
+        self.assertEqual(self.product.discountPrice(),disc)
+
+class NewProductForm(TestCase):
+    def test_productform(self):
+        data = {
+                'productname' : 'surface',
+                'producttype': 'laptop', 
+                'user': 'oyster_tran',
+                'dateentered': '2022-5-7',
+                'price': '1200',
+                'producturl': 'http://www.microsoft.com',
+                'description':'half laptop half tablet'
+            }
+        form = ProductForm (data)
+        self.assertTrue(form.is_valid)
+
+     #this test is failing   
+    def test_Productform_Invalid(self):
+        data = {
+                'productname' : 'surface',
+                'producttype': 'laptop', 
+                'user': 'oyster_tran',
+                'dateentered': 'January 2, 2022',
+                'producturl': 'http://www.microsoft.com',
+                'description':'half laptop half tablet'
+            }
+        form = ProductForm (data)
+        self.assertFalse(form.is_valid)
